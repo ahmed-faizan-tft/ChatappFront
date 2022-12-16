@@ -1,0 +1,57 @@
+[
+    {
+        "userId": 1,
+        "message": "Hello world",
+        "time":"2:30 PM"
+    },
+    {
+        "userId": 1,
+        "message": "How are you",
+        "time":"2:30 PM"
+    },
+    {
+        "userId": 2,
+        "message": "Hello dude",
+        "time":"2:30 PM"
+    },
+    {
+        "userId": 2,
+        "message": "I am fine",
+        "time":"2:31 PM"
+    },
+    {
+        "userId": 2,
+        "message": "What's about you?",
+        "time":"2:31 PM"
+    },
+    {
+        "userId": 1,
+        "message": "I am also fine",
+        "time":"2:31 PM"
+    },
+    {
+        "userId": 1,
+        "message": "What are you doing currently",
+        "time":"2:32 PM"
+    },
+    {
+        "userId": 2,
+        "message": "Working in a IT company",
+        "time":"2:33 PM"
+    },
+    {
+        "userId": 2,
+        "message": "as a full stack",
+        "time":"2:33 PM"
+    },
+    {
+        "userId": 2,
+        "message": "web developer",
+        "time":"2:33 PM"
+    },
+    {
+        "userId": 1,
+        "message": "Hello world",
+        "time":"2:30 PM"
+    }
+]

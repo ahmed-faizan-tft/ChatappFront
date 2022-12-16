@@ -1,0 +1,100 @@
+.left-side{
+  width: 30%;
+  height: 90vh;
+  background: #696a6b;
+  overflow-y: auto;
+}
+
+.right-side{
+  width: 70%;
+  height: 90vh;
+}
+
+.entire-side{
+  display: flex;
+}
+
+.search-user{
+  width:100%;
+  height: 50px;
+  margin: 10px 0;
+}
+
+.container {
+  width: 95%;
+  border: 2px solid #616060;
+  background: radial-gradient(circle at -4% -12.9%, rgb(74, 98, 110) 0.3%, rgb(74, 98, 110) 90.2%);
+  border-radius: 20px;
+  padding: 10px;
+  margin: 10px 10px;
+  
+}
+.darker {
+  border-color: #ccc;
+  background-color: #ddd;
+}
+
+.container::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.container img {
+  float: left;
+  max-width: 60px;
+  width: 100%;
+  margin-right: 20px;
+  border-radius: 50%;
+}
+
+.container p{
+  color: "#a2cbf3"
+}
+
+.Navbar-side{
+  width: 100vw;
+  height: 10vh;
+  background: radial-gradient(circle at -4% -12.9%, rgb(74, 98, 110) 0.3%, rgb(74, 98, 110) 90.2%);
+}
+
+.Navbar-side h3{
+  padding: 5px 0px;
+}
+
+
+.chat-body{
+  width: 100%;
+  height: 85%;
+  overflow-y: auto;
+  position: relative;
+}
+
+
+.chat-send{
+  width: 100%;
+  height: 15%;
+  border-top: 1px solid grey;
+  padding: 10px 10px 10px 30px;
+  display: flex;  
+}
+
+
+.about-user{
+  width: 200px;
+  height: 100%;
+  margin-left: 20px;
+  display: flex;
+}
+
+
+.message-box{
+  width: 200px;
+  height: 40px;
+  margin-left: 2px;
+  margin-top: 2px;
+  border: 0.5px solid grey;
+  border-radius: 10px;
+  padding: 4px;
+  background-color: greenyellow;
+}

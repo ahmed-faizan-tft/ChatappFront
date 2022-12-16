@@ -1,0 +1,33 @@
+[
+    {
+        "userId":1,
+        "name": "Faizan",
+        "image":"https://pixabay.com/photos/sunset-sun-dramatic-clouds-wind-7504891/"
+    },
+    {
+        "userId":2,
+        "name": "Farhan",
+        "image":"https://pixabay.com/photos/sunset-sun-dramatic-clouds-wind-7504891/"
+    },
+    {
+        "userId":3,
+        "name": "Mohit",
+        "image":"https://pixabay.com/photos/sunset-sun-dramatic-clouds-wind-7504891/"
+    },
+    {
+        "userId":4,
+        "name": "Ashish",
+        "image":"https://pixabay.com/photos/sunset-sun-dramatic-clouds-wind-7504891/"
+    },
+    {
+        "userId":5,
+        "name": "Amit",
+        "image":"https://pixabay.com/photos/sunset-sun-dramatic-clouds-wind-7504891/"
+    },
+    {
+        "userId":6,
+        "name": "Umar",
+        "image":"https://pixabay.com/photos/sunset-sun-dramatic-clouds-wind-7504891/"
+    }
+
+]
