@@ -10,7 +10,7 @@ import Message from "./Message";
 import { useEffect, useState } from "react";
 import axios from 'axios';
 import socket from '../socketio/connection.js'
-
+import fileDownload from 'js-file-download';
 
 
 
@@ -40,6 +40,16 @@ function Chats(){
         fetchData();
     },[]);
 
+    // useEffect(()=>{
+    //     socket.on('receive_message',(data)=>{
+    //         setChatData([...chatData,data])
+    //     });
+
+    //     socket.on('downloadFile', (data)=>{
+    //         fileDownload(data, 'filename.js');
+    //     })
+    // },[socket])
+
     function updateNewMessage(value){
         setNewMessage(value)
     }
@@ -54,8 +64,14 @@ function Chats(){
         socket.on('receive_message',(data)=>{
             setChatData([...chatData,data])
         });
+
+        socket.on('downloadFile', (data)=>{
+            fileDownload(data, 'filename.js');
+        })
     }
     socketEvents()
+
+    
 
 
 
@@ -73,7 +89,8 @@ function Chats(){
                 newData = await axios.post('http://localhost:8000/user/file',formData,{
                     headers: {'Authorization': `Bearer ${localStorage.getItem('token')}`, "Content-Type": "multipart/form-data" }
                 });
-
+                
+                newData.data.data.message =  `http://localhost:8000/user/download/file`
                 message = newData.data.data;
             }else{
                 newData = await axios.post(`http://localhost:8000/chat/add`,{
@@ -83,14 +100,9 @@ function Chats(){
                 },{headers: {'Authorization': `Bearer ${localStorage.getItem('token')}`}});
                 message = newData.data.message;
             }
-            console.log('newData.data ',newData.data)
-            
-            
-            
-            
-            
-            setChatData([...chatData,message]);
+
             socket.emit('send_message',message);
+            setChatData([...chatData,message]);
             setNewMessage("");
             setSelectedFile(null);
             
