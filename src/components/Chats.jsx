@@ -1,17 +1,14 @@
 import SearchArea from "./SearchArea";
-import Buttonn from "./Buttonn";
-
 import SendIcon from '@mui/icons-material/Send';
-// import AttachFileIcon from '@mui/icons-material/AttachFile';
 import MicIcon from '@mui/icons-material/Mic';
 import VideocamIcon from '@mui/icons-material/Videocam';
 import Message from "./Message";
-
 import { useEffect, useState } from "react";
 import API from '../utils/api.js';
 import environment from '../utils/constant.js';
 import socket from '../socketio/connection.js'
 import fileDownload from 'js-file-download';
+import Button1 from "./Button1";
 
 
 
@@ -108,10 +105,10 @@ function Chats(){
 
             <div className="chat-send">
                 <SearchArea updateNewMessage={updateNewMessage} message={newMessage}/>
-                <Buttonn updateChatData={updateChatData}> <SendIcon/> </Buttonn>
+                <Button1 buttonType='icon' onClick={updateChatData} buttonStyle='buttonn-style'> <SendIcon/> </Button1>
                 <input type="file"  onChange={handleFileUploading}/>
-                <Buttonn> <MicIcon/> </Buttonn>
-                <Buttonn> <VideocamIcon/> </Buttonn>
+                <Button1 buttonType='icon' buttonStyle='buttonn-style'> <MicIcon/> </Button1>
+                <Button1 buttonType='icon' buttonStyle='buttonn-style'> <VideocamIcon/> </Button1>
             </div>
         </>
     )

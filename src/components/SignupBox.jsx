@@ -77,9 +77,8 @@ const SignupBox = () => {
           <Input type="text" placeHolder = "Enter Username"  onChange={updateUsername}> <PersonIcon/> </Input>
           <Input type="email" placeHolder = "Enter email" onChange={updateEmail}> <EmailIcon/> </Input>
           <Input type="password" placeHolder = "Enter Password" onChange={updatePasswod}> <KeyIcon/> </Input>
-          <Button1 buttonStyle='button1-zerotop' name="Submit" backgroundColor="info" onClick={submitCreds}/>
-          {/* <Button1 marginTop="20px" name="Facebook" backgroundColor="primary"> <FacebookIcon/> </Button1> */}
-          <Button1 buttonStyle='button1-top' name="Google" backgroundColor="danger"  link={`${environment.BASE_URL}/user/auth/google`}> <GoogleIcon/> </Button1>
+          <Button1 buttonType='normal' buttonStyle='button1-zerotop' name="Submit" backgroundColor="info" onClick={submitCreds}/>
+          <Button1 buttonType='normal' buttonStyle='button1-top' name="Google" backgroundColor="danger"  link={`${environment.BASE_URL}/user/auth/google`}> <GoogleIcon/> </Button1>
           <ToastContainer/>
       </div>
     </>
