@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import API from '../utils/api.js';
-
+import cookie from '../utils/cookies.js'
 
 function NavbarSide() {
   let [username, setUsername] = useState('');
@@ -23,7 +23,8 @@ function NavbarSide() {
   });
 
   function logout(){
-    localStorage.removeItem('token');
+    // localStorage.removeItem('token');
+    cookie.clearCookie('token')
     navigate('/');
   }
 

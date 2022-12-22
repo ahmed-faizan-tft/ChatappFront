@@ -1,5 +1,6 @@
 import environment from './constant.js';
 import axios from 'axios';
+import cookie from '../utils/cookies.js'
 
 const API = {
     createUser: async (data)=>{
@@ -26,20 +27,20 @@ const API = {
     },
 
     getLoggedinUserInfo: async ()=>{
-        return await axios.get(`${environment.BASE_URL}/user/get`,{headers: {'Authorization': `Bearer ${localStorage.getItem('token')}`}});
+        return await axios.get(`${environment.BASE_URL}/user/get`,{headers: {'Authorization': `Bearer ${cookie.getCookie('token')}`}});
     },
 
     getALLChat: async ()=>{
-        return await axios.get(`${environment.BASE_URL}/chat/get`,{headers: {'Authorization': `Bearer ${localStorage.getItem('token')}`}});
+        return await axios.get(`${environment.BASE_URL}/chat/get`,{headers: {'Authorization': `Bearer ${cookie.getCookie('token')}`}});
     },
 
     getFileInfoForDownload: async ()=>{
-        return await axios.get(`${environment.BASE_URL}/user/download/file`,{headers: {'Authorization': `Bearer ${localStorage.getItem('token')}`}});
+        return await axios.get(`${environment.BASE_URL}/user/download/file`,{headers: {'Authorization': `Bearer ${cookie.getCookie('token')}`}});
     },
 
     UploadFile: async (data)=>{
         return await axios.post(`${environment.BASE_URL}/user/file`,data,{
-                    headers: {'Authorization': `Bearer ${localStorage.getItem('token')}`, "Content-Type": "multipart/form-data" }
+                    headers: {'Authorization': `Bearer ${cookie.getCookie('token')}`, "Content-Type": "multipart/form-data" }
                 });
     },
 
@@ -48,7 +49,7 @@ const API = {
                 message: data.newMessage,
                 sender: data.username,
                 receiver: "ahmed"
-                },{headers: {'Authorization': `Bearer ${localStorage.getItem('token')}`}});
+                },{headers: {'Authorization': `Bearer ${cookie.getCookie('token')}`}});
     }
 }
 

@@ -5,6 +5,7 @@ import Button1 from './Button1'
 import KeyIcon from '@mui/icons-material/Key';
 import { useNavigate, useParams } from 'react-router-dom';
 import API from '../utils/api.js'
+import { ToastContainer, toast } from 'react-toastify';
 
 const ResetBox = () => {
     const navigate = useNavigate();
@@ -34,6 +35,16 @@ const ResetBox = () => {
     
         } catch (error) {
             console.log(error.response.data)
+            toast.error(error.response.data.message, {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "colored",
+              });
           setError(error.response.data.message)
         }
     }
@@ -45,7 +56,7 @@ const ResetBox = () => {
           <Input type="password" placeHolder = "Enter Password"  onChange={updatePasswod}> <KeyIcon/> </Input>
           <Input type="password" placeHolder = "Enter confirm password" onChange={updateConfirmPasswod}> <KeyIcon/> </Input>
           <Button1 buttonStyle='button1-zerotop' name="Submit" backgroundColor="info" onClick={submitCreds}/>
-    
+          <ToastContainer/>
       </div>
     </div>
   )

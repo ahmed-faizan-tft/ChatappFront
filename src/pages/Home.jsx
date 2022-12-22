@@ -3,14 +3,16 @@ import Chats from '../components/Chats'
 import NavbarSide from '../components/NavbarSide';
 import Users from '../components/Users'
 import { useNavigate } from 'react-router-dom';
-
+import cookie from '../utils/cookies.js'
 
 const Home = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    let isAuth = localStorage.getItem('token');
-    if(!isAuth && isAuth === null ) {
+    
+
+    let isAuth = cookie.getCookie('token');
+    if(!isAuth) {
         navigate("/login");
     }
     

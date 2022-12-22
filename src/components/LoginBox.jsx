@@ -9,6 +9,8 @@ import PersonIcon from '@mui/icons-material/Person';
 // import GoogleIcon from '@mui/icons-material/Google';
 import {useNavigate} from 'react-router-dom';
 import API from '../utils/api.js'
+import cookie from '../utils/cookies.js'
+import { ToastContainer, toast } from 'react-toastify';
 
 
 
@@ -19,10 +21,9 @@ const LoginBox = () => {
   const [password, setPassword] = useState('');
   useEffect(() => {
       async function fetchData(){
-
-        let isAuth = localStorage.getItem('token');
-        if(isAuth && isAuth !== null) {
-          navigate('/home')
+        let isAuth = cookie.getCookie('token');
+        if(isAuth) {
+            navigate("/home");
         }
       }
       fetchData();
@@ -43,7 +44,9 @@ const LoginBox = () => {
       let Data = await API.loginUser({email, password});
       let accessToken = Data.data.data.access_token;
 
-      localStorage.setItem('token', accessToken);
+      
+      cookie.setCookie('token', accessToken);
+      
 
       if(Data.status === 200 && Data.data.success === true){
         navigate(`/home`)
@@ -51,7 +54,19 @@ const LoginBox = () => {
       }
 
     } catch (error) {
+      console.log('hello toast')
       setError(error.response.data.message)
+      toast.error(error.response.data.message, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        });
+      
     }
   }
 
@@ -59,6 +74,7 @@ const LoginBox = () => {
   return (
     <div className='inner-login-body'>
         <Heading headingName='Sign in'/>
+        <ToastContainer />
         <Input type="email" placeHolder = "Enter email" onChange={updateEmail}> <PersonIcon/> </Input>
         <Input type="password" placeHolder = "Enter Password" onChange={updatePasswod}> <KeyIcon/> </Input>
         <Button1 buttonStyle='button1-zerotop' name="Submit" backgroundColor="info"  onClick={submitCreds}/>

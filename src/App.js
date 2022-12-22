@@ -1,5 +1,6 @@
 import Login  from './pages/Login';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 
 import Home  from './pages/Home';

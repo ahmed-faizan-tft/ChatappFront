@@ -10,6 +10,8 @@ import EmailIcon from '@mui/icons-material/Email';
 import { useNavigate } from 'react-router-dom';
 import API from '../utils/api.js'
 import environment from '../utils/constant.js';
+import cookie from '../utils/cookies.js'
+import { ToastContainer, toast } from 'react-toastify';
 
 const SignupBox = () => {
   const navigate = useNavigate();
@@ -20,10 +22,9 @@ const SignupBox = () => {
 
   useEffect(() => {
     async function fetchData(){
-
-      let isAuth = localStorage.getItem('token');
-      if(isAuth && isAuth !== null) {
-        navigate('/home');
+      let isAuth = cookie.getCookie('token');
+        if(isAuth) {
+            navigate("/home");
       }
     }
     fetchData();
@@ -54,6 +55,16 @@ const SignupBox = () => {
 
     } catch (error) {
       console.log(error);
+      toast.error(error.response.data.message, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        });
       setError(error.response.data.message)
     }
   }
@@ -69,7 +80,7 @@ const SignupBox = () => {
           <Button1 buttonStyle='button1-zerotop' name="Submit" backgroundColor="info" onClick={submitCreds}/>
           {/* <Button1 marginTop="20px" name="Facebook" backgroundColor="primary"> <FacebookIcon/> </Button1> */}
           <Button1 buttonStyle='button1-top' name="Google" backgroundColor="danger"  link={`${environment.BASE_URL}/user/auth/google`}> <GoogleIcon/> </Button1>
-
+          <ToastContainer/>
       </div>
     </>
   )
