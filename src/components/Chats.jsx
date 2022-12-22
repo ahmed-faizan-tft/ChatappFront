@@ -15,14 +15,6 @@ import fileDownload from 'js-file-download';
 
 
 
-
-const searchStyle = {
-    width: '100%',
-    height: '60%'
-    
-}
-
-
 function Chats(){
     let [chatData, setChatData] = useState([]);
     let [newMessage, setNewMessage] = useState('');
@@ -36,7 +28,6 @@ function Chats(){
             setChatData(getData.data.message);
 
             const data = await API.getLoggedinUserInfo();
-            console.log('data username ',data, getData)
             const name = data.data.data.username;
             setUsername(name)
         }
@@ -109,14 +100,14 @@ function Chats(){
                 {
                     chatData.map((data,index)=>{
                         return  data.sender === username?
-                        <Message key={index} color="#3CB371" time={data.time} message={data.message} isFile={data.isFile} downloadFile={downloadFile} side="70%"/> 
-                        : <Message key={index} color="#FFDEAD" time={data.time} message={data.message} isFile={data.isFile} downloadFile={downloadFile} side='5px'/>
+                        <Message key={index}  messageBoxColor='message-right-color' messageBox='message-right-side' time={data.time} message={data.message} isFile={data.isFile} downloadFile={downloadFile} /> 
+                        : <Message key={index} messageBoxColor='message-left-color' messageBox='message-left-side' time={data.time} message={data.message} isFile={data.isFile} downloadFile={downloadFile} />
                     })
                 }       
             </div>
 
             <div className="chat-send">
-                <SearchArea styleSearch={searchStyle} updateNewMessage={updateNewMessage} message={newMessage}/>
+                <SearchArea updateNewMessage={updateNewMessage} message={newMessage}/>
                 <Buttonn updateChatData={updateChatData}> <SendIcon/> </Buttonn>
                 <input type="file"  onChange={handleFileUploading}/>
                 <Buttonn> <MicIcon/> </Buttonn>

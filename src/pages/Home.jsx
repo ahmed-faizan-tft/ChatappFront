@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
-import Chats from './Chats'
-import NavbarSide from './NavbarSide';
-import Users from './Users'
+import Chats from '../components/Chats'
+import NavbarSide from '../components/NavbarSide';
+import Users from '../components/Users'
 import { useNavigate } from 'react-router-dom';
 
 

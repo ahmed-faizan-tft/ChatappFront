@@ -1,9 +1,9 @@
-import Login  from './components/Login';
+import Login  from './pages/Login';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
-import Home  from './components/Home';
-import Signup from './components/Signup'
+import Home  from './pages/Home';
+import Signup from './pages/Signup'
 
 
 import {
@@ -12,7 +12,7 @@ import {
   Route,
   Link
 } from "react-router-dom";
-import Reset from './components/Reset';
+import Reset from './pages/Reset';
 
 
 function App() {

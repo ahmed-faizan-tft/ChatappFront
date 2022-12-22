@@ -29,11 +29,11 @@ function NavbarSide() {
 
   return (
     <>
-        <Container style={{height:'100%', width:"100%", backgroundColor:"yellow", border:'none'}}>
-          <Row style={{marginLeft:"2%", height:'100%', width:"100%"}}>
+        <Container className='navbar-container'>
+          <Row className='navbar-row'>
             <Col xs={9}><h3>Chat Application</h3></Col>
             <Col xs={2}> <Image image={avatar}/> <span>{username}</span></Col>
-            <Col><button onClick={logout} style={{backgroundColor:'blueviolet', outline:'none', border:'none'}}>Logout</button></Col>
+            <Col><button onClick={logout} className='navbar-button'>Logout</button></Col>
           </Row>
         </Container>
     </>

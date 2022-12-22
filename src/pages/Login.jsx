@@ -1,5 +1,5 @@
 import '../asset/style/css/login.css'
-import LoginBox from './LoginBox'
+import LoginBox from '../components/LoginBox'
 
 const Login = () => {
   

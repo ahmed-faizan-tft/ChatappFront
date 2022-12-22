@@ -11,7 +11,7 @@ function Users(){
                 <SearchUser/>
             </div>
 
-            <hr  style={{color:'white'}} />
+            <hr className='users-style' />
 
             <div className="users-list">
                 {

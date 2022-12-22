@@ -2,8 +2,8 @@ import React from 'react'
 
 const Span = () => {
   return (
-    <small style={{marginTop: '-30px', marginLeft: '50%'}}>
-        <a href="#" style={{textDecoration:'none'}}>Forget Password</a>
+    <small className='span-small'>
+        <a href="#" className='span-a'>Forget Password</a>
     </small>
   )
 }

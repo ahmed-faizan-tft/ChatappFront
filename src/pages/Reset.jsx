@@ -1,5 +1,5 @@
 import React from 'react'
-import ResetBox from './ResetBox'
+import ResetBox from '../components/ResetBox'
 
 
 const Reset = () => {

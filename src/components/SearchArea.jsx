@@ -2,10 +2,10 @@ import React from 'react'
 
 const SearchArea = (props) => {
   return (
-    <div style={{  width: '75%',height: '100%'}}>
+    <div className='searcharea-div'>
         <input type="text" 
         placeholder='Type message here...' 
-        style={props.styleSearch} 
+        className='searcharea-input'
         value={props.message}
         onChange={(event)=>{
           props.updateNewMessage(event.target.value);

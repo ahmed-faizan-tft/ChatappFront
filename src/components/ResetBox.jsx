@@ -44,7 +44,7 @@ const ResetBox = () => {
           <Heading headingName='Reset Password'/>
           <Input type="password" placeHolder = "Enter Password"  onChange={updatePasswod}> <KeyIcon/> </Input>
           <Input type="password" placeHolder = "Enter confirm password" onChange={updateConfirmPasswod}> <KeyIcon/> </Input>
-          <Button1 marginTop="0px" name="Submit" backgroundColor="info" onClick={submitCreds}/>
+          <Button1 buttonStyle='button1-zerotop' name="Submit" backgroundColor="info" onClick={submitCreds}/>
     
       </div>
     </div>
