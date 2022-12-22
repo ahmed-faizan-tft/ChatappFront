@@ -1,10 +1,6 @@
 import React from 'react'
 
-const buttonStyle = {
-  
-}
-
-const Button = (props) => {
+const Buttonn = (props) => {
   return (
     <div>
         <button type={props.type} className='buttonn-style' onClick={props.updateChatData}>{props.children}</button>
@@ -12,4 +8,4 @@ const Button = (props) => {
   )
 }
 
-export default Button
+export default Buttonn

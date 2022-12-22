@@ -77,11 +77,7 @@ const LoginBox = () => {
         <ToastContainer />
         <Input type="email" placeHolder = "Enter email" onChange={updateEmail}> <PersonIcon/> </Input>
         <Input type="password" placeHolder = "Enter Password" onChange={updatePasswod}> <KeyIcon/> </Input>
-        <Button1 buttonStyle='button1-zerotop' name="Submit" backgroundColor="info"  onClick={submitCreds}/>
-        {/* <Span/> */}
-        {/* <Button1 marginTop="20px" name="Facebook" backgroundColor="primary"> <FacebookIcon/> </Button1>
-        <Button1 marginTop="10px" name="Google" backgroundColor="danger"  link={`http://localhost:8000/user/auth/google`}> <GoogleIcon/> </Button1> */}
-        
+        <Button1 buttonStyle='button1-zerotop' name="Submit" backgroundColor="info"  onClick={submitCreds}/>        
     </div>
   )
 }
