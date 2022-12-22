@@ -6,7 +6,7 @@ import avatar from '../asset/Avatar.png'
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useState } from 'react';
-import axios from 'axios';
+import API from '../utils/api.js';
 
 
 function NavbarSide() {
@@ -15,7 +15,7 @@ function NavbarSide() {
 
   useEffect(()=>{
     async function fetchData(){
-      const data = await axios.get(`http://localhost:8000/user/get`,{headers: {'Authorization': `Bearer ${localStorage.getItem('token')}`}})
+      const data = await API.getLoggedinUserInfo();
       const name = data.data.data.username;
       setUsername(name)
     }

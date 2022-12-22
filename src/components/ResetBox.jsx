@@ -3,8 +3,8 @@ import React, {  useState } from 'react'
 import Heading from './Heading'
 import Button1 from './Button1'
 import KeyIcon from '@mui/icons-material/Key';
-import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
+import API from '../utils/api.js'
 
 const ResetBox = () => {
     const navigate = useNavigate();
@@ -24,7 +24,7 @@ const ResetBox = () => {
     async function submitCreds(){
         try {
           
-          let newUser = await axios.post('http://localhost:8000/user/reset',{id, password, confirmPassword});
+          let newUser = await API.resetPassword({id, password, confirmPassword});
             console.log(newUser)
           if(newUser.status === 200 && newUser.data.success === true){
             console.log('resetbox---->');

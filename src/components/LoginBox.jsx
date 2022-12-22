@@ -8,7 +8,7 @@ import PersonIcon from '@mui/icons-material/Person';
 // import FacebookIcon from '@mui/icons-material/Facebook';
 // import GoogleIcon from '@mui/icons-material/Google';
 import {useNavigate} from 'react-router-dom';
-import axios from 'axios'
+import API from '../utils/api.js'
 
 
 
@@ -40,7 +40,7 @@ const LoginBox = () => {
   async function submitCreds(){
     try {
 
-      let Data = await axios.post('http://localhost:8000/user/login',{email, password});
+      let Data = await API.loginUser({email, password});
       let accessToken = Data.data.data.access_token;
 
       localStorage.setItem('token', accessToken);

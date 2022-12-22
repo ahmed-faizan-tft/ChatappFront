@@ -1,4 +1,4 @@
-import '../asset/css/login.css'
+import '../asset/style/css/login.css'
 import LoginBox from './LoginBox'
 
 const Login = () => {

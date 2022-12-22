@@ -8,9 +8,11 @@ import VideocamIcon from '@mui/icons-material/Videocam';
 import Message from "./Message";
 
 import { useEffect, useState } from "react";
-import axios from 'axios';
+import API from '../utils/api.js';
+import environment from '../utils/constant.js';
 import socket from '../socketio/connection.js'
 import fileDownload from 'js-file-download';
+
 
 
 
@@ -30,32 +32,24 @@ function Chats(){
 
     useEffect(()=>{
         async function fetchData(){
-            const getData = await axios.get(`http://localhost:8000/chat/get`,{headers: {'Authorization': `Bearer ${localStorage.getItem('token')}`}})
+            const getData = await API.getALLChat();
             setChatData(getData.data.message);
 
-            const data = await axios.get(`http://localhost:8000/user/get`,{headers: {'Authorization': `Bearer ${localStorage.getItem('token')}`}})
+            const data = await API.getLoggedinUserInfo();
+            console.log('data username ',data, getData)
             const name = data.data.data.username;
             setUsername(name)
         }
         fetchData();
     },[]);
 
-    // useEffect(()=>{
-    //     socket.on('receive_message',(data)=>{
-    //         setChatData([...chatData,data])
-    //     });
-
-    //     socket.on('downloadFile', (data)=>{
-    //         fileDownload(data, 'filename.js');
-    //     })
-    // },[socket])
+    
 
     function updateNewMessage(value){
         setNewMessage(value)
     }
 
     function handleFileUploading(event){
-        // console.log(event.target.files[0]);
         setSelectedFile(event.target.files[0])
 
     }
@@ -71,7 +65,10 @@ function Chats(){
     }
     socketEvents()
 
-    
+    async function downloadFile(){
+        let data = await API.getFileInfoForDownload();
+        console.log(data.data);
+    }
 
 
 
@@ -86,18 +83,12 @@ function Chats(){
                 formData.append("sender", username);
                 formData.append("receiver", "ahmed");
 
-                newData = await axios.post('http://localhost:8000/user/file',formData,{
-                    headers: {'Authorization': `Bearer ${localStorage.getItem('token')}`, "Content-Type": "multipart/form-data" }
-                });
+                newData = await API.UploadFile(formData);
                 
-                newData.data.data.message =  `http://localhost:8000/user/download/file`
+                newData.data.data.message =  `${environment.BASE_URL}/user/download/file`
                 message = newData.data.data;
             }else{
-                newData = await axios.post(`http://localhost:8000/chat/add`,{
-                message: newMessage,
-                sender: username,
-                receiver: "ahmed"
-                },{headers: {'Authorization': `Bearer ${localStorage.getItem('token')}`}});
+                newData = await API.addNewChat({newMessage,username})
                 message = newData.data.message;
             }
 
@@ -116,14 +107,12 @@ function Chats(){
         <>
             <div className="chat-body">
                 {
-                    chatData.map((data)=>{
-                        return data.sender === username?
-                        <Message color="#3CB371" time={data.time} message={data.message} side="70%"/> 
-                        : <Message color="#FFDEAD" time={data.time} message={data.message} side='5px'/>
+                    chatData.map((data,index)=>{
+                        return  data.sender === username?
+                        <Message key={index} color="#3CB371" time={data.time} message={data.message} isFile={data.isFile} downloadFile={downloadFile} side="70%"/> 
+                        : <Message key={index} color="#FFDEAD" time={data.time} message={data.message} isFile={data.isFile} downloadFile={downloadFile} side='5px'/>
                     })
-                }
-                
-                          
+                }       
             </div>
 
             <div className="chat-send">

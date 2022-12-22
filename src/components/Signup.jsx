@@ -1,5 +1,5 @@
 import React from 'react'
-import '../asset/css/login.css'
+import '../asset/style/css/login.css'
 import SignupBox from './SignupBox'
 
 const Login = () => {

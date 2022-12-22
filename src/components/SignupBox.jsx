@@ -7,8 +7,9 @@ import PersonIcon from '@mui/icons-material/Person';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import GoogleIcon from '@mui/icons-material/Google';
 import EmailIcon from '@mui/icons-material/Email';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import API from '../utils/api.js'
+import environment from '../utils/constant.js';
 
 const SignupBox = () => {
   const navigate = useNavigate();
@@ -44,7 +45,7 @@ const SignupBox = () => {
   async function submitCreds(){
     try {
       
-      let newUser = await axios.post('http://localhost:8000/user/create',{username, email, password});
+      let newUser = await API.createUser({username, email, password})
 
       if(newUser.status === 201 && newUser.data.success === true){
         navigate('/login')
@@ -52,6 +53,7 @@ const SignupBox = () => {
       }
 
     } catch (error) {
+      console.log(error);
       setError(error.response.data.message)
     }
   }
@@ -66,7 +68,7 @@ const SignupBox = () => {
           <Input type="password" placeHolder = "Enter Password" onChange={updatePasswod}> <KeyIcon/> </Input>
           <Button1 marginTop="0px" name="Submit" backgroundColor="info" onClick={submitCreds}/>
           <Button1 marginTop="20px" name="Facebook" backgroundColor="primary"> <FacebookIcon/> </Button1>
-          <Button1 marginTop="10px" name="Google" backgroundColor="danger"  link={`http://localhost:8000/user/auth/google`}> <GoogleIcon/> </Button1>
+          <Button1 marginTop="10px" name="Google" backgroundColor="danger"  link={`${environment.BASE_URL}/user/auth/google`}> <GoogleIcon/> </Button1>
 
       </div>
     </>
