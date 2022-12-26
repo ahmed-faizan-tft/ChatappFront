@@ -34,6 +34,16 @@ function Chats(){
         fetchData();
     },[]);
 
+    useEffect(()=>{
+        socket.on('receive_message',(data)=>{
+            setChatData([...chatData,data])
+        });
+
+        socket.on('downloadFile', (data)=>{
+            fileDownload(data, 'filename.js');
+        })
+    },[])
+
     
 
     function updateNewMessage(value){
@@ -45,16 +55,16 @@ function Chats(){
 
     }
 
-    function socketEvents(){
-        socket.on('receive_message',(data)=>{
-            setChatData([...chatData,data])
-        });
+    // function socketEvents(){
+    //     socket.on('receive_message',(data)=>{
+    //         setChatData([...chatData,data])
+    //     });
 
-        socket.on('downloadFile', (data)=>{
-            fileDownload(data, 'filename.js');
-        })
-    }
-    socketEvents()
+    //     socket.on('downloadFile', (data)=>{
+    //         fileDownload(data, 'filename.js');
+    //     })
+    // }
+    // socketEvents()
 
     async function downloadFile(){
         let data = await API.getFileInfoForDownload();
