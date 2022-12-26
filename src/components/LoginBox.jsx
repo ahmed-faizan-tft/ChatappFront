@@ -11,12 +11,13 @@ import {useNavigate} from 'react-router-dom';
 import API from '../utils/api.js'
 import cookie from '../utils/cookies.js'
 import { ToastContainer, toast } from 'react-toastify';
+import Span from './Span'
 
 
 
 const LoginBox = () => {
   const navigate = useNavigate();
-  const [error, setError] = useState('');
+  // const [error, setError] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   useEffect(() => {
@@ -38,6 +39,12 @@ const LoginBox = () => {
     setPassword(event.target.value);
   }
 
+  const handleKeypress = (event) => {
+    if (event.key === 'Enter') {
+      submitCreds();
+    }
+  };
+
   async function submitCreds(){
     try {
 
@@ -55,7 +62,7 @@ const LoginBox = () => {
 
     } catch (error) {
       console.log('hello toast')
-      setError(error.response.data.message)
+      // setError(error.response.data.message)
       toast.error(error.response.data.message, {
         position: "top-right",
         autoClose: 5000,
@@ -76,12 +83,9 @@ const LoginBox = () => {
         <Heading headingName='Sign in'/>
         <ToastContainer />
         <Input type="email" placeHolder = "Enter email" onChange={updateEmail}> <PersonIcon/> </Input>
-        <Input type="password" placeHolder = "Enter Password" onChange={updatePasswod}> <KeyIcon/> </Input>
+        <Input type="password" placeHolder = "Enter Password" onChange={updatePasswod} onKeyPress={handleKeypress}> <KeyIcon/> </Input>
         <Button1 buttonType="normal" buttonStyle='button1-zerotop' name="Submit" backgroundColor="info"  onClick={submitCreds}/>
-        {/* <Span/> */}
-        {/* <Button1 marginTop="20px" name="Facebook" backgroundColor="primary"> <FacebookIcon/> </Button1>
-        <Button1 marginTop="10px" name="Google" backgroundColor="danger"  link={`http://localhost:8000/user/auth/google`}> <GoogleIcon/> </Button1> */}
-        
+        <Span link='/signup' linkName= 'Go to signup'/>        
     </div>
   )
 }

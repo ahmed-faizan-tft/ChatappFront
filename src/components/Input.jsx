@@ -13,6 +13,7 @@ const Input = (props) => {
           aria-label={props.placeHolder}
           aria-describedby="basic-addon1"
           onChange={props.onChange}
+          onKeyDown={props.onKeyPress}
         />
       </InputGroup>
     </div>

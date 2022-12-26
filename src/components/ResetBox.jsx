@@ -9,7 +9,7 @@ import { ToastContainer, toast } from 'react-toastify';
 
 const ResetBox = () => {
     const navigate = useNavigate();
-    const [error, setError] = useState('');
+    // const [error, setError] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const {id} = useParams();
@@ -21,6 +21,12 @@ const ResetBox = () => {
     function updateConfirmPasswod(event){
         setConfirmPassword(event.target.value);
     }
+
+    const handleKeypress = (event) => {
+      if (event.key === 'Enter') {
+        submitCreds();
+      }
+    };
 
     async function submitCreds(){
         try {
@@ -45,7 +51,7 @@ const ResetBox = () => {
               progress: undefined,
               theme: "colored",
               });
-          setError(error.response.data.message)
+          // setError(error.response.data.message)
         }
     }
 
@@ -54,8 +60,8 @@ const ResetBox = () => {
         <div className='inner-login-body'>
           <Heading headingName='Reset Password'/>
           <Input type="password" placeHolder = "Enter Password"  onChange={updatePasswod}> <KeyIcon/> </Input>
-          <Input type="password" placeHolder = "Enter confirm password" onChange={updateConfirmPasswod}> <KeyIcon/> </Input>
-          <Button1 buttonStyle='button1-zerotop' name="Submit" backgroundColor="info" onClick={submitCreds}/>
+          <Input type="password" placeHolder = "Enter confirm password" onChange={updateConfirmPasswod} onKeyPress={handleKeypress}> <KeyIcon/> </Input>
+          <Button1 buttonType='normal' buttonStyle='button1-zerotop' name="Submit" backgroundColor="info" onClick={submitCreds}/>
           <ToastContainer/>
       </div>
     </div>

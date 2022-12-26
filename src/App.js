@@ -11,7 +11,6 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
-  Link
 } from "react-router-dom";
 import Reset from './pages/Reset';
 
