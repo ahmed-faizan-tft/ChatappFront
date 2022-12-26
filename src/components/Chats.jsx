@@ -31,19 +31,9 @@ function Chats(){
         fetchData();
     },[]);
 
-    useEffect(()=>{
-        socket.on('receive_message',(data)=>{
-            setChatData([...chatData,data])
-        });
-
-        socket.on('downloadFile', (data)=>{
-            fileDownload(data, 'filename.js');
-        })
-    },[])
-
     
 
-    function NewMessage(value){
+    function updateNewMessage(value){
         setNewMessage(value)
     }
 
@@ -52,12 +42,25 @@ function Chats(){
 
     }
 
+    function socketEvents(){
+        socket.on('receive_message',(data)=>{
+            setChatData([...chatData,data])
+        });
+
+        socket.on('downloadFile', (data)=>{
+            fileDownload(data, 'filename.js');
+        })
+    }
+    socketEvents()
+
     async function downloadFile(){
         let data = await API.getFileInfoForDownload();
         console.log(data.data);
     }
 
-    async function submit(){
+
+
+    async function updateChatData(){
         try {
             let newData;
             let message;
@@ -101,8 +104,8 @@ function Chats(){
             </div>
 
             <div className="chat-send">
-                <SearchArea updateNewMessage={NewMessage} message={newMessage}/>
-                <Button1 buttonType='icon' onClick={submit} buttonStyle='buttonn-style'> <SendIcon/> </Button1>
+                <SearchArea updateNewMessage={updateNewMessage} message={newMessage}/>
+                <Button1 buttonType='icon' onClick={updateChatData} buttonStyle='buttonn-style'> <SendIcon/> </Button1>
                 <input type="file"  onChange={handleFileUploading}/>
                 <Button1 buttonType='icon' buttonStyle='buttonn-style'> <MicIcon/> </Button1>
                 <Button1 buttonType='icon' buttonStyle='buttonn-style'> <VideocamIcon/> </Button1>

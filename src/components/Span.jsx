@@ -1,9 +1,9 @@
 import React from 'react'
 
-const Span = (props) => {
+const Span = () => {
   return (
     <small className='span-small'>
-        <a href={props.link} className='span-a'>{props.linkName}</a>
+        <a href="#" className='span-a'>Forget Password</a>
     </small>
   )
 }

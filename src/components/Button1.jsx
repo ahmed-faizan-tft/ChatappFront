@@ -7,7 +7,7 @@ const Button1 = (props) => {
       {
       props.buttonType === 'normal'?
         <div className={`d-grid gap-2 ${props.buttonStyle}`}>
-            <Button href={props.link} variant={props.backgroundColor} size="sm" onClick={props.onClick} >
+            <Button href={props.link} variant={props.backgroundColor} size="sm" onClick={props.onClick}>
               {props.children} {props.name}
             </Button>
         </div>

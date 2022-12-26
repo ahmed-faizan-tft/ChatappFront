@@ -1,5 +1,9 @@
 import React from 'react'
 
+const imageStyle = {
+  
+}
+
 const image = (props) => {
   return (
     <div>  
