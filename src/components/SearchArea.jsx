@@ -9,7 +9,8 @@ const SearchArea = (props) => {
         value={props.message}
         onChange={(event)=>{
           props.updateNewMessage(event.target.value);
-        }}/>
+        }}
+        onKeyDown={props.onEnterKeyPress}/>
     </div>
 
   )

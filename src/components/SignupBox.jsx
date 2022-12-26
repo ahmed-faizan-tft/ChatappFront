@@ -15,7 +15,6 @@ import Span from './Span';
 
 const SignupBox = () => {
   const navigate = useNavigate();
-  const [error, setError] = useState('');
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -43,6 +42,12 @@ const SignupBox = () => {
     setPassword(event.target.value);
   }
 
+  function submitCredsByEnterKey(event) {
+    if(event.key === 'Enter'){
+        submitCreds();
+    }
+  }
+
   async function submitCreds(){
     try {
       
@@ -65,7 +70,6 @@ const SignupBox = () => {
         progress: undefined,
         theme: "colored",
         });
-      setError(error.response.data.message)
     }
   }
 
@@ -74,9 +78,9 @@ const SignupBox = () => {
       
       <div className='inner-login-body'>
           <Heading headingName='SignUp'/>
-          <Input type="text" placeHolder = "Enter Username"  onChange={updateUsername}> <PersonIcon/> </Input>
-          <Input type="email" placeHolder = "Enter email" onChange={updateEmail}> <EmailIcon/> </Input>
-          <Input type="password" placeHolder = "Enter Password" onChange={updatePasswod}> <KeyIcon/> </Input>
+          <Input type="text" placeHolder = "Enter Username"  onChange={updateUsername} onEnterKeyPress={submitCredsByEnterKey}> <PersonIcon/> </Input>
+          <Input type="email" placeHolder = "Enter email" onChange={updateEmail} onEnterKeyPress={submitCredsByEnterKey}> <EmailIcon/> </Input>
+          <Input type="password" placeHolder = "Enter Password" onChange={updatePasswod} onEnterKeyPress={submitCredsByEnterKey}> <KeyIcon/> </Input>
           <Button1 buttonType='normal' buttonStyle='button1-zerotop' name="Submit" backgroundColor="info" onClick={submitCreds}/>
           <Button1 buttonType='normal' buttonStyle='button1-top' name="Google" backgroundColor="danger"  link={`${environment.BASE_URL}/user/auth/google`}> <GoogleIcon/> </Button1>
           <Span link="/login" linkName = "Go to sign in"/>

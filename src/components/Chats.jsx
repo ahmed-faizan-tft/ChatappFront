@@ -5,7 +5,6 @@ import VideocamIcon from '@mui/icons-material/Videocam';
 import Message from "./Message";
 import { useEffect, useState } from "react";
 import API from '../utils/api.js';
-// import environment from '../utils/constant.js';
 import socket from '../socketio/connection.js'
 import fileDownload from 'js-file-download';
 import Button1 from "./Button1";
@@ -34,7 +33,8 @@ function Chats(){
     useEffect(()=>{
         socket.on('receive_message',(data)=>{
             console.log('chatData-->', chatData)
-            setChatData([...chatData,data]);
+            // setChatData([...chatData,data]);
+            setChatData(prevData => [...prevData,data]);
         });
 
         socket.on('downloadFile', (data)=>{
@@ -59,6 +59,12 @@ function Chats(){
         let data = await API.getFileInfoForDownload();
         console.log(data.data);
     }
+
+    function sendMessageByEnterKey(event) {
+        if(event.key === 'Enter'){
+            submitMessage();
+        }
+      }
 
     async function submitMessage(){
         try {
@@ -104,7 +110,7 @@ function Chats(){
             </div>
 
             <div className="chat-send">
-                <SearchArea updateNewMessage={updateNewMessage} message={newMessage}/>
+                <SearchArea updateNewMessage={updateNewMessage} message={newMessage} onEnterKeyPress={sendMessageByEnterKey}/>
                 <Button1 buttonType='icon' onClick={submitMessage} buttonStyle='buttonn-style'> <SendIcon/> </Button1>
                 <input type="file"  onChange={handleFileUploading}/>
                 <Button1 buttonType='icon' buttonStyle='buttonn-style'> <MicIcon/> </Button1>
