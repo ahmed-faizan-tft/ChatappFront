@@ -4,7 +4,6 @@ import Heading from './Heading'
 import Button1 from './Button1'
 import KeyIcon from '@mui/icons-material/Key';
 import PersonIcon from '@mui/icons-material/Person';
-import FacebookIcon from '@mui/icons-material/Facebook';
 import GoogleIcon from '@mui/icons-material/Google';
 import EmailIcon from '@mui/icons-material/Email';
 import { useNavigate } from 'react-router-dom';
@@ -12,6 +11,7 @@ import API from '../utils/api.js'
 import environment from '../utils/constant.js';
 import cookie from '../utils/cookies.js'
 import { ToastContainer, toast } from 'react-toastify';
+import Span from './Span';
 
 const SignupBox = () => {
   const navigate = useNavigate();
@@ -79,6 +79,7 @@ const SignupBox = () => {
           <Input type="password" placeHolder = "Enter Password" onChange={updatePasswod}> <KeyIcon/> </Input>
           <Button1 buttonType='normal' buttonStyle='button1-zerotop' name="Submit" backgroundColor="info" onClick={submitCreds}/>
           <Button1 buttonType='normal' buttonStyle='button1-top' name="Google" backgroundColor="danger"  link={`${environment.BASE_URL}/user/auth/google`}> <GoogleIcon/> </Button1>
+          <Span link="/login" linkName = "Go to sign in"/>
           <ToastContainer/>
       </div>
     </>

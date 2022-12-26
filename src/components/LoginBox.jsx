@@ -11,6 +11,7 @@ import {useNavigate} from 'react-router-dom';
 import API from '../utils/api.js'
 import cookie from '../utils/cookies.js'
 import { ToastContainer, toast } from 'react-toastify';
+import Span from './Span';
 
 
 
@@ -78,9 +79,7 @@ const LoginBox = () => {
         <Input type="email" placeHolder = "Enter email" onChange={updateEmail}> <PersonIcon/> </Input>
         <Input type="password" placeHolder = "Enter Password" onChange={updatePasswod}> <KeyIcon/> </Input>
         <Button1 buttonType="normal" buttonStyle='button1-zerotop' name="Submit" backgroundColor="info"  onClick={submitCreds}/>
-        {/* <Span/> */}
-        {/* <Button1 marginTop="20px" name="Facebook" backgroundColor="primary"> <FacebookIcon/> </Button1>
-        <Button1 marginTop="10px" name="Google" backgroundColor="danger"  link={`http://localhost:8000/user/auth/google`}> <GoogleIcon/> </Button1> */}
+        <Span link="/signup" linkName = "Go to signup"/>
         
     </div>
   )

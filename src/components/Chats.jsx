@@ -5,7 +5,7 @@ import VideocamIcon from '@mui/icons-material/Videocam';
 import Message from "./Message";
 import { useEffect, useState } from "react";
 import API from '../utils/api.js';
-import environment from '../utils/constant.js';
+// import environment from '../utils/constant.js';
 import socket from '../socketio/connection.js'
 import fileDownload from 'js-file-download';
 import Button1 from "./Button1";
@@ -31,6 +31,18 @@ function Chats(){
         fetchData();
     },[]);
 
+    useEffect(()=>{
+        socket.on('receive_message',(data)=>{
+            console.log('chatData-->', chatData)
+            setChatData([...chatData,data]);
+        });
+
+        socket.on('downloadFile', (data)=>{
+            fileDownload(data, 'filename.js');
+        })
+    },[])
+
+
     
 
     function updateNewMessage(value){
@@ -42,25 +54,13 @@ function Chats(){
 
     }
 
-    function socketEvents(){
-        socket.on('receive_message',(data)=>{
-            setChatData([...chatData,data])
-        });
-
-        socket.on('downloadFile', (data)=>{
-            fileDownload(data, 'filename.js');
-        })
-    }
-    socketEvents()
 
     async function downloadFile(){
         let data = await API.getFileInfoForDownload();
         console.log(data.data);
     }
 
-
-
-    async function updateChatData(){
+    async function submitMessage(){
         try {
             let newData;
             let message;
@@ -73,7 +73,7 @@ function Chats(){
 
                 newData = await API.UploadFile(formData);
                 
-                newData.data.data.message =  `${environment.BASE_URL}/user/download/file`
+                // newData.data.data.message =  `${environment.BASE_URL}/user/download/file`
                 message = newData.data.data;
             }else{
                 newData = await API.addNewChat({newMessage,username})
@@ -105,7 +105,7 @@ function Chats(){
 
             <div className="chat-send">
                 <SearchArea updateNewMessage={updateNewMessage} message={newMessage}/>
-                <Button1 buttonType='icon' onClick={updateChatData} buttonStyle='buttonn-style'> <SendIcon/> </Button1>
+                <Button1 buttonType='icon' onClick={submitMessage} buttonStyle='buttonn-style'> <SendIcon/> </Button1>
                 <input type="file"  onChange={handleFileUploading}/>
                 <Button1 buttonType='icon' buttonStyle='buttonn-style'> <MicIcon/> </Button1>
                 <Button1 buttonType='icon' buttonStyle='buttonn-style'> <VideocamIcon/> </Button1>
