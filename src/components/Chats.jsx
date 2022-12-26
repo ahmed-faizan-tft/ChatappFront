@@ -2,12 +2,15 @@ import SearchArea from "./SearchArea";
 import SendIcon from '@mui/icons-material/Send';
 import MicIcon from '@mui/icons-material/Mic';
 import VideocamIcon from '@mui/icons-material/Videocam';
+import FileUploadIcon from '@mui/icons-material/FileUpload';
 import Message from "./Message";
 import { useEffect, useState } from "react";
 import API from '../utils/api.js';
 import socket from '../socketio/connection.js'
 import fileDownload from 'js-file-download';
 import Button1 from "./Button1";
+import {useCallback} from 'react'
+import {useDropzone} from 'react-dropzone'
 
 
 
@@ -16,6 +19,11 @@ function Chats(){
     let [newMessage, setNewMessage] = useState('');
     let [username, setUsername] = useState('');
     let [selectedFile, setSelectedFile] = useState(null);
+    const onDrop = useCallback(acceptedFiles => {
+        console.log('acceptedFiles--> ',acceptedFiles);
+    }, [])
+
+    const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
 
 
     useEffect(()=>{
@@ -112,7 +120,15 @@ function Chats(){
             <div className="chat-send">
                 <SearchArea updateNewMessage={updateNewMessage} message={newMessage} onEnterKeyPress={sendMessageByEnterKey}/>
                 <Button1 buttonType='icon' onClick={submitMessage} buttonStyle='buttonn-style'> <SendIcon/> </Button1>
-                <input type="file"  onChange={handleFileUploading}/>
+                {/* <input type="file"  onChange={handleFileUploading}/> */}
+                <div {...getRootProps()}>
+                    <input {...getInputProps()} />
+                    {
+                      isDragActive ?
+                        <p>Drop the files here ...</p> :
+                        <p><Button1 buttonType='icon' buttonStyle='buttonn-style'> <FileUploadIcon/> </Button1></p>
+                    }
+                </div>
                 <Button1 buttonType='icon' buttonStyle='buttonn-style'> <MicIcon/> </Button1>
                 <Button1 buttonType='icon' buttonStyle='buttonn-style'> <VideocamIcon/> </Button1>
             </div>
