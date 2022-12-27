@@ -21,7 +21,6 @@ function Chats(){
     let [selectedFile, setSelectedFile] = useState(null);
 
     const onDrop = useCallback(acceptedFiles => {
-        console.log('acceptedFiles--> ',acceptedFiles);
         setSelectedFile(acceptedFiles[0])
     }, [])
     const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
@@ -63,7 +62,9 @@ function Chats(){
 
 
     async function downloadFile(){
+        socket.emit('set_socket',"setSocket")
         let data = await API.getFileInfoForDownload();
+        
         console.log(data.data);
     }
 
@@ -118,7 +119,6 @@ function Chats(){
             <div className="chat-send">
                 <SearchArea updateNewMessage={updateNewMessage} message={newMessage} onEnterKeyPress={sendMessageByEnterKey}/>
                 <Button1 buttonType='icon' onClick={submitMessage} buttonStyle='buttonn-style'> <SendIcon/> </Button1>
-                {/* <input type="file"  onChange={handleFileUploading}/> */}
                 <div {...getRootProps()}>
                     <input {...getInputProps()} />
                     {

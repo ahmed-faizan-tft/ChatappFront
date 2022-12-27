@@ -20,7 +20,7 @@ function NavbarSide() {
       setUsername(name)
     }
     fetchData();
-  });
+  },[]);
 
   function logout(){
     // localStorage.removeItem('token');
