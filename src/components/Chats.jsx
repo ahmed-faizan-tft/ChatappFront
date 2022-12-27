@@ -34,7 +34,7 @@ function Chats(){
     useEffect(()=>{
         socket.on('receive_message',(data)=>{
             console.log('chatData-->', chatData)
-            setChatData([...chatData,data]);
+            setChatData(prevData => [...prevData,data]);
         });
 
         socket.on('downloadFile', (data)=>{
