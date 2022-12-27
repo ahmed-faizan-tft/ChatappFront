@@ -2,7 +2,7 @@ import SearchArea from "./SearchArea";
 import SendIcon from '@mui/icons-material/Send';
 import MicIcon from '@mui/icons-material/Mic';
 import VideocamIcon from '@mui/icons-material/Videocam';
-import FileUploadIcon from '@mui/icons-material/FileUpload';
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import Message from "./Message";
 import { useEffect, useState } from "react";
 import API from '../utils/api.js';
@@ -19,10 +19,11 @@ function Chats(){
     let [newMessage, setNewMessage] = useState('');
     let [username, setUsername] = useState('');
     let [selectedFile, setSelectedFile] = useState(null);
+
     const onDrop = useCallback(acceptedFiles => {
         console.log('acceptedFiles--> ',acceptedFiles);
+        setSelectedFile(acceptedFiles[0])
     }, [])
-
     const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
 
 
@@ -40,8 +41,6 @@ function Chats(){
 
     useEffect(()=>{
         socket.on('receive_message',(data)=>{
-            console.log('chatData-->', chatData)
-            // setChatData([...chatData,data]);
             setChatData(prevData => [...prevData,data]);
         });
 
@@ -57,10 +56,10 @@ function Chats(){
         setNewMessage(value)
     }
 
-    function handleFileUploading(event){
-        setSelectedFile(event.target.files[0])
+    // function handleFileUploading(event){
+    //     setSelectedFile(event.target.files[0])
 
-    }
+    // }
 
 
     async function downloadFile(){
@@ -80,14 +79,13 @@ function Chats(){
             let message;
 
             if(selectedFile){
+                console.log(selectedFile);
                 const formData = new FormData();
                 formData.append("file", selectedFile);
                 formData.append("sender", username);
                 formData.append("receiver", "ahmed");
 
                 newData = await API.UploadFile(formData);
-                
-                // newData.data.data.message =  `${environment.BASE_URL}/user/download/file`
                 message = newData.data.data;
             }else{
                 newData = await API.addNewChat({newMessage,username})
@@ -126,7 +124,7 @@ function Chats(){
                     {
                       isDragActive ?
                         <p>Drop the files here ...</p> :
-                        <p><Button1 buttonType='icon' buttonStyle='buttonn-style'> <FileUploadIcon/> </Button1></p>
+                        <Button1 buttonType='icon' buttonStyle='buttonn-style'> <CloudUploadIcon/> </Button1>
                     }
                 </div>
                 <Button1 buttonType='icon' buttonStyle='buttonn-style'> <MicIcon/> </Button1>

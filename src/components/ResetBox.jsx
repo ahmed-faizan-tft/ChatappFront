@@ -9,7 +9,6 @@ import { ToastContainer, toast } from 'react-toastify';
 
 const ResetBox = () => {
     const navigate = useNavigate();
-    const [error, setError] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const {id} = useParams();
@@ -34,7 +33,7 @@ const ResetBox = () => {
           }
     
         } catch (error) {
-            console.log(error.response.data)
+            
             toast.error(error.response.data.message, {
               position: "top-right",
               autoClose: 5000,
@@ -45,7 +44,7 @@ const ResetBox = () => {
               progress: undefined,
               theme: "colored",
               });
-          setError(error.response.data.message)
+          
         }
     }
 
