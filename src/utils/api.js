@@ -34,8 +34,8 @@ const API = {
         return await axios.get(`${environment.BASE_URL}/chat/get`,{headers: {'Authorization': `Bearer ${cookie.getCookie('token')}`}});
     },
 
-    getFileInfoForDownload: async ()=>{
-        return await axios.get(`${environment.BASE_URL}/user/download/file`,{headers: {'Authorization': `Bearer ${cookie.getCookie('token')}`}});
+    getFileInfoForDownload: async (socketId)=>{
+        return await axios.get(`${environment.BASE_URL}/user/download/file/${socketId}`,{headers: {'Authorization': `Bearer ${cookie.getCookie('token')}`}});
     },
 
     UploadFile: async (data)=>{

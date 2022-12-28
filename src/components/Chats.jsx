@@ -62,8 +62,8 @@ function Chats(){
 
 
     async function downloadFile(){
-        socket.emit('set_socket',"setSocket")
-        let data = await API.getFileInfoForDownload();
+        // socket.emit('set_socket',"setSocket")
+        let data = await API.getFileInfoForDownload(socket.id);
         
         console.log(data.data);
     }
@@ -80,7 +80,6 @@ function Chats(){
             let message;
 
             if(selectedFile){
-                console.log(selectedFile);
                 const formData = new FormData();
                 formData.append("file", selectedFile);
                 formData.append("sender", username);
