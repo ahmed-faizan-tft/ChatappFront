@@ -25,9 +25,7 @@ const ResetBox = () => {
         try {
           
           let newUser = await API.resetPassword({id, password, confirmPassword});
-            console.log(newUser)
           if(newUser.status === 200 && newUser.data.success === true){
-            console.log('resetbox---->');
             navigate('/login')
             return;
           }

@@ -14,7 +14,7 @@ import {useDropzone} from 'react-dropzone'
 
 
 
-function Chats(){
+function Chats(props){
     let [chatData, setChatData] = useState([]);
     let [newMessage, setNewMessage] = useState('');
     let [username, setUsername] = useState('');
@@ -34,6 +34,7 @@ function Chats(){
             const data = await API.getLoggedinUserInfo();
             const name = data.data.data.username;
             setUsername(name)
+            props.getUserNameFromChat(name)
         }
         fetchData();
     },[]);
@@ -55,17 +56,8 @@ function Chats(){
         setNewMessage(value)
     }
 
-    // function handleFileUploading(event){
-    //     setSelectedFile(event.target.files[0])
-
-    // }
-
-
     async function downloadFile(){
-        // socket.emit('set_socket',"setSocket")
-        let data = await API.getFileInfoForDownload(socket.id);
-        
-        console.log(data.data);
+        await API.getFileInfoForDownload(socket.id);
     }
 
     function sendMessageByEnterKey(event) {

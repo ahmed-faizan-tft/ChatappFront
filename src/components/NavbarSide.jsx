@@ -4,26 +4,15 @@ import Col from 'react-bootstrap/Col';
 import Image from './Image';
 import avatar from '../asset/Avatar.png'
 import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
-import { useState } from 'react';
-import API from '../utils/api.js';
+import { useContext } from 'react';
 import cookie from '../utils/cookies.js'
+import userInfo from '../utils/states/UserInfo';
 
 function NavbarSide() {
-  let [username, setUsername] = useState('');
+  const userName = useContext(userInfo)
   const navigate = useNavigate();
 
-  useEffect(()=>{
-    async function fetchData(){
-      const data = await API.getLoggedinUserInfo();
-      const name = data.data.data.username;
-      setUsername(name)
-    }
-    fetchData();
-  },[]);
-
   function logout(){
-    // localStorage.removeItem('token');
     cookie.clearCookie('token')
     navigate('/');
   }
@@ -33,7 +22,7 @@ function NavbarSide() {
         <Container className='navbar-container'>
           <Row className='navbar-row'>
             <Col xs={9}><h3>Chat Application</h3></Col>
-            <Col xs={2}> <Image image={avatar}/> <span>{username}</span></Col>
+            <Col xs={2}> <Image image={avatar}/> <span>{userName}</span></Col>
             <Col><button onClick={logout} className='navbar-button'>Logout</button></Col>
           </Row>
         </Container>
